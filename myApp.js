@@ -7,13 +7,13 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 //--------creating a schema -----------
 let personSchema = new mongoose.Schema({
   name :{
-    type:string,
-    required:true
+    type: String,
+    required: true
   } ,
   age : number,
   favoriteFoods : [
     {
-      type:string
+      type: String
     }
   ]
 });
