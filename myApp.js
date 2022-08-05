@@ -6,12 +6,14 @@ const mongoose= require('mongoose');
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 //--------creating a schema -----------
 let personSchema = new mongoose.Schema({
-  name :{
+  name:{
     type: String,
     required: true
   } ,
-  age : number,
-  favoriteFoods : [
+  age: { 
+    type: Number
+   },
+  favoriteFoods: [
     {
       type: String
     }
@@ -20,13 +22,20 @@ let personSchema = new mongoose.Schema({
 
 //---------creating a model --------
 
-const Blog = mongoose.model('person', personSchema);
+const Person = mongoose.model('Person', personSchema);
 
-//-------------
 const createAndSavePerson = (done) => {
+//-------------adding data ------------
+  let yacine = new Person({name:'Yacine',age:33,favoriteFoods:["t3am","chorba","Rechta"]});
+//---------------saving a person ----------- 
+  yacine.save((err,data)=>{
+    if (err) return console.error(err);
+    done(null,data);
+
+  })
   
-  if (error) return done(error);
-  done(null /*, data*/);
+
+  
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
